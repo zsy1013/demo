@@ -1,4 +1,3 @@
-from json import tool
 import pydeck as pdk
 from pydeck.types import String
 import pandas as pd
@@ -8,10 +7,10 @@ import json
 
 st.title('World Heritage Plus(DEMO)')
 
-json_open = open('/Users/otsukashigeki/Desktop/output (1).json', 'r')
-json_load = json.load(json_open)
+#json_open = open('/Users/otsukashigeki/Desktop/output (1).json', 'r')
+#json_load = json.load(json_open)
 
-DATA = pd.read_csv('/Users/otsukashigeki/Desktop/sample.csv')
+#DATA = pd.read_csv('/Users/otsukashigeki/Desktop/sample.csv')
 DATA_2 = pd.read_csv('/Users/otsukashigeki/Desktop/WH_sample2.csv')
 
 df = pd.DataFrame(
