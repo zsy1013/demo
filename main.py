@@ -8,9 +8,10 @@ st.title('World Heritage Plus(DEMO)')
 
 df = pd.read_csv('WH_sample_mapbox_app.csv')
 
-df_random = pd.DataFrame(
-   np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-   columns=['lat', 'lon'])
+st.sidebar.checkbox('気温データ【月平均(℃)】※準備中')
+st.sidebar.checkbox('降水量データ【月平均(mm)】※準備中')
+st.sidebar.slider('気温の変化(月別)', 1, 12, 1, 1)
+st.sidebar.slider('降水量の変化(月別)', 1, 12, 1, 1)
 
 #----------------------------------
 num_list = ['登録基準(ⅰ)', '登録基準(ⅱ)', '登録基準(ⅲ)', '登録基準(ⅳ)', '登録基準(ⅴ)', 
