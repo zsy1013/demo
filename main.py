@@ -25,6 +25,10 @@ for n in numbers:
     n = n.replace('登録基準', '')
     n = df[df[n]==1]
     heritage_df = heritage_df.append(n)
+heritage_df = heritage_df.drop_duplicates()
+
+num = len(heritage_df['種類'])
+st.write(f'表示された世界遺産：**{num}** 件')
 
 st.pydeck_chart(pdk.Deck(
    map_style='mapbox://styles/mapbox/outdoors-v11',
