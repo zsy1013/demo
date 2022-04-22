@@ -3,19 +3,27 @@ from pydeck.types import String
 import pandas as pd
 import streamlit as st
 import numpy as np
-import json
 
 st.title('World Heritage Plus(DEMO)')
 
-#json_open = open('/Users/otsukashigeki/Desktop/output (1).json', 'r')
-#json_load = json.load(json_open)
+df = pd.read_csv('WH_sample_mapbox_app.csv')
 
-#DATA = pd.read_csv('/Users/otsukashigeki/Desktop/sample.csv')
-DATA_2 = pd.read_csv('WH_sample2.csv')
-
-df = pd.DataFrame(
+df_random = pd.DataFrame(
    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
    columns=['lat', 'lon'])
+
+#----------------------------------
+num_list = ['登録基準(ⅰ)', '登録基準(ⅱ)', '登録基準(ⅲ)', '登録基準(ⅳ)', '登録基準(ⅴ)', 
+            '登録基準(ⅵ)', '登録基準(ⅶ)', '登録基準(ⅷ)', '登録基準(ⅸ)', '登録基準(ⅹ)']
+
+numbers = st.multiselect('登録基準を選択してください', num_list, num_list)
+#----------------------------------
+
+heritage_df = pd.DataFrame()
+for n in numbers:
+    n = n.replace('登録基準', '')
+    n = df[df[n]==1]
+    heritage_df = heritage_df.append(n)
 
 st.pydeck_chart(pdk.Deck(
    map_style='mapbox://styles/mapbox/outdoors-v11',
@@ -28,7 +36,7 @@ st.pydeck_chart(pdk.Deck(
    layers=[
        pdk.Layer(
            'ScatterplotLayer',
-           data=DATA_2,
+           data=heritage_df,
            get_position='[lon, lat]',
            pickable=True,
            opacity=0.8,
@@ -39,19 +47,5 @@ st.pydeck_chart(pdk.Deck(
            radius_max_pixels=5,
            line_width_min_pixels=1,
            get_fill_color=[255, 140, 0],
-           #tooltip={"html": '<b>popup:</b>'}
-           #tooltip={'text':'{popup}'}
-           #radius=200,
-           #elevation_scale=4,
-           #elevation_range=[0, 1000],
-           #pickable=True,
-           #extruded=True,
        )],
        tooltip={"text": "{popup}"}))
-       #pdk.Layer(
-       #    'HeatmapLayer',
-       #    data=DATA,
-       #    get_position='[lon, lat]',
-       #    get_color='[200, 30, 0, 160]',
-       #    get_radius=200,
-       #),
