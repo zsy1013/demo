@@ -37,9 +37,9 @@ except:
 st.pydeck_chart(pdk.Deck(
    map_style='mapbox://styles/mapbox/outdoors-v11',
    initial_view_state=pdk.ViewState(
-       latitude=37.76,
-       longitude=-122.4,
-       zoom=11,
+       latitude=35.69109990914361,
+       longitude=139.75687919760415,
+       zoom=8,
        pitch=50,
    ),
    layers=[
