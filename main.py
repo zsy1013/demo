@@ -7,6 +7,7 @@ import numpy as np
 st.title('World Heritage Plus(DEMO)')
 
 df = pd.read_csv('WH_sample_mapbox_app.csv')
+df_rain = pd.read_csv('rain2.csv')
 
 st.sidebar.checkbox('気温データ【月平均(℃)】※準備中')
 st.sidebar.checkbox('降水量データ【月平均(mm)】※準備中')
@@ -54,6 +55,15 @@ st.pydeck_chart(pdk.Deck(
            radius_min_pixels=10,
            radius_max_pixels=5,
            line_width_min_pixels=1,
-           get_fill_color=[255, 140, 0],
+           get_fill_color=[255, 140, 0]
+       ),
+       pdk.Layer(
+           'ColumnLayer',
+           data=df_rain,
+           get_position='[lon, lat]',
+           get_elevation='J',
+           elevation_scale=5000,
+           radius=5000,  
+           get_fill_color=[0, 0, 255, 'J' * 255]
        )],
        tooltip={"text": "{popup}"}))
