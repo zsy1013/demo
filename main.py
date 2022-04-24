@@ -10,10 +10,10 @@ df = pd.read_csv('WH_sample_mapbox_app.csv')
 df_rain = pd.read_csv('rain2.csv')
 df_tmp = pd.read_csv('tmp.csv')
 
-st.sidebar.checkbox('気温データ【月平均(℃)】※準備中')
-st.sidebar.checkbox('降水量データ【月平均(mm)】※準備中')
-st.sidebar.slider('気温の変化(月別)', 1, 12, 1, 1)
-st.sidebar.slider('降水量の変化(月別)', 1, 12, 1, 1)
+tmp = st.sidebar.checkbox('気温データ【月平均(℃)】※準備中')
+rain = st.sidebar.checkbox('降水量データ【月平均(mm)】※準備中')
+tmp_n = st.sidebar.slider('気温の変化(月別)', 1, 12, 1, 1)
+rain_n = st.sidebar.slider('降水量の変化(月別)', 1, 12, 1, 1)
 
 t_n = ['Nan', 'J', 1]
 if tmp == 1:
