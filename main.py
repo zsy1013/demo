@@ -15,6 +15,12 @@ st.sidebar.checkbox('降水量データ【月平均(mm)】※準備中')
 st.sidebar.slider('気温の変化(月別)', 1, 12, 1, 1)
 st.sidebar.slider('降水量の変化(月別)', 1, 12, 1, 1)
 
+t_n = ['Nan', 'J', 1]
+if tmp == 1:
+    tmp_n = t_n[tmp_n]
+else:
+    tmp_n = t_n[0]
+
 #----------------------------------
 num_list = ['登録基準(ⅰ)', '登録基準(ⅱ)', '登録基準(ⅲ)', '登録基準(ⅳ)', '登録基準(ⅴ)', 
             '登録基準(ⅵ)', '登録基準(ⅶ)', '登録基準(ⅷ)', '登録基準(ⅸ)', '登録基準(ⅹ)']
@@ -62,7 +68,7 @@ st.pydeck_chart(pdk.Deck(
            'ColumnLayer',
            data=df_tmp,
            get_position='[lon, lat]',
-           get_elevation='J',
+           get_elevation=tmp_n,
            elevation_scale=10000,
            radius=5000,
            #auto_highlight=True,
