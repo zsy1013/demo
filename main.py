@@ -20,6 +20,12 @@ if tmp == 1:
     tmp_n = t_n[tmp_n]
 else:
     df_tmp = 0
+    
+r_n = ['Nan', 'J', 2]
+if rain == 1:
+    rain_n = r_n[rain_n]
+else:
+    df_rain = 0
 
 #----------------------------------
 num_list = ['登録基準(ⅰ)', '登録基準(ⅱ)', '登録基準(ⅲ)', '登録基準(ⅳ)', '登録基準(ⅴ)', 
@@ -62,6 +68,7 @@ st.pydeck_chart(pdk.Deck(
            radius_min_pixels=10,
            radius_max_pixels=5,
            line_width_min_pixels=1,
+           get_line_color=[150, 40, 40],
            get_fill_color=[255, 140, 0]
        ),
        pdk.Layer(
@@ -79,7 +86,7 @@ st.pydeck_chart(pdk.Deck(
            'ColumnLayer',
            data=df_rain,
            get_position='[lon, lat]',
-           get_elevation='J',
+           get_elevation=rain_n,
            elevation_scale=5000,
            radius=5000,  
            get_fill_color=[0, 0, 255, 'J' * 255]
