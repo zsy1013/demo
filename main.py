@@ -25,10 +25,10 @@ df = heritage_data()
 df_rain = rain_data()
 df_tmp = tmp_data()
 
-tmp = st.sidebar.checkbox('気温データ【月平均(℃)】※準備中')
-rain = st.sidebar.checkbox('降水量データ【月平均(mm)】※準備中')
-tmp_n = st.sidebar.slider('気温の変化(月別)', 1, 12, 1, 1)
-rain_n = st.sidebar.slider('降水量の変化(月別)', 1, 12, 1, 1)
+tmp = st.sidebar.checkbox('気温データ')
+rain = st.sidebar.checkbox('降水量データ')
+tmp_n = st.sidebar.slider('気温の変化(月別)※準備中', 1, 12, 1, 1)
+rain_n = st.sidebar.slider('降水量の変化(月別)※準備中', 1, 12, 1, 1)
 
 t_n = ['Nan', 'J', 1]
 if tmp == 1:
@@ -94,8 +94,8 @@ st.pydeck_chart(pdk.Deck(
            data=df_tmp,
            get_position='[lon, lat]',
            get_elevation=tmp_n,
-           elevation_scale=10000,
-           radius=5000,
+           elevation_scale=11000,
+           radius=10000,
            #auto_highlight=True,
            #pickable=True,
            get_fill_color=[255, 0, 0, 150]
@@ -105,8 +105,8 @@ st.pydeck_chart(pdk.Deck(
            data=df_rain,
            get_position='[lon, lat]',
            get_elevation=rain_n,
-           elevation_scale=5000,
-           radius=5000,  
+           elevation_scale=11000,
+           radius=10000,  
            get_fill_color=[0, 0, 255, 'J' * 255]
        )],
        tooltip={"text": "{popup}"}))
