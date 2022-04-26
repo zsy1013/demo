@@ -6,9 +6,24 @@ import numpy as np
 
 st.title('World Heritage Plus(DEMO)')
 
-df = pd.read_csv('WH_sample_mapbox_app.csv')
-df_rain = pd.read_csv('rain2.csv')
-df_tmp = pd.read_csv('tmp.csv')
+@st.cache
+def heritage_data():
+    df = pd.read_csv('WH_sample_mapbox_app.csv')
+    return df 
+
+@st.cache
+def rain_data():
+    df_rain = pd.read_csv('rain_minmax.csv')
+    return df_rain
+
+@st.cache
+def tmp_data():
+    df_tmp = pd.read_csv('tmp_minmax.csv')
+    return df_tmp
+    
+df = heritage_data()
+df_rain = rain_data()
+df_tmp = tmp_data()
 
 tmp = st.sidebar.checkbox('気温データ【月平均(℃)】※準備中')
 rain = st.sidebar.checkbox('降水量データ【月平均(mm)】※準備中')
@@ -34,6 +49,8 @@ num_list = ['登録基準(ⅰ)', '登録基準(ⅱ)', '登録基準(ⅲ)', '登�
 numbers = st.multiselect('登録基準を選択してください', num_list, num_list)
 #----------------------------------
 
+MAP_BOX_API = 'pk.eyJ1Ijoic2hpZ2UwNjAxIiwiYSI6ImNsMWhudjAydjAxenkzam4xeWNtZDUybm8ifQ.Z0RDtHNjsN_tiR-M4Fr1GQ'
+
 heritage_df = pd.DataFrame()
 for n in numbers:
     n = n.replace('登録基準', '')
@@ -49,6 +66,7 @@ except:
 
 st.pydeck_chart(pdk.Deck(
    map_style='mapbox://styles/mapbox/outdoors-v11',
+   api_keys={'mapbox':MAP_BOX_API},
    initial_view_state=pdk.ViewState(
        latitude=35.69109990914361,
        longitude=139.75687919760415,
