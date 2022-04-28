@@ -13,30 +13,31 @@ def heritage_data():
 
 @st.cache
 def rain_data():
-    df_rain = pd.read_csv('rain_minmax.csv')
+    df_rain = pd.read_csv('rain_data.csv')
     return df_rain
 
 @st.cache
 def tmp_data():
-    df_tmp = pd.read_csv('tmp_minmax.csv')
+    df_tmp = pd.read_csv('tmp_data.csv')
     return df_tmp
     
 df = heritage_data()
 df_rain = rain_data()
 df_tmp = tmp_data()
 
+st.sidebar.write('表示するデータを選んでください')
 tmp = st.sidebar.checkbox('気温データ')
 rain = st.sidebar.checkbox('降水量データ')
-tmp_n = st.sidebar.slider('気温の変化(月別)※準備中', 1, 12, 1, 1)
-rain_n = st.sidebar.slider('降水量の変化(月別)※準備中', 1, 12, 1, 1)
+tmp_n = st.sidebar.slider('気温の変化(月別)', 1, 12, 1, 1)
+rain_n = st.sidebar.slider('降水量の変化(月別)', 1, 12, 1, 1)
 
-t_n = ['Nan', 'J', 1]
+t_n = ['Nan','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 if tmp == 1:
     tmp_n = t_n[tmp_n]
 else:
     df_tmp = 0
     
-r_n = ['Nan', 'J', 2]
+r_n = ['Nan','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 if rain == 1:
     rain_n = r_n[rain_n]
 else:
@@ -94,19 +95,17 @@ st.pydeck_chart(pdk.Deck(
            data=df_tmp,
            get_position='[lon, lat]',
            get_elevation=tmp_n,
-           elevation_scale=11000,
+           elevation_scale=30000,
            radius=10000,
-           #auto_highlight=True,
-           #pickable=True,
-           get_fill_color=[255, 0, 0, 150]
+           get_fill_color=[255, 0, 0, 100]
        ),
        pdk.Layer(
            'ColumnLayer',
            data=df_rain,
            get_position='[lon, lat]',
            get_elevation=rain_n,
-           elevation_scale=11000,
+           elevation_scale=3000,
            radius=10000,  
-           get_fill_color=[0, 0, 255, 'J' * 255]
+           get_fill_color=[0, 0, 255, 100]
        )],
        tooltip={"text": "{popup}"}))
