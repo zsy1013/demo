@@ -66,7 +66,8 @@ except:
     st.write('登録基準は1つ以上選んでください')
 
 st.pydeck_chart(pdk.Deck(
-   map_style='mapbox://styles/mapbox/outdoors-v11',
+   map_style='mapbox://styles/shige0601/cl2ueb9w4003l15p2320lqsep',
+#    map_style='mapbox://styles/mapbox/outdoors-v11',
    api_keys={'mapbox':MAP_BOX_API},
    initial_view_state=pdk.ViewState(
        latitude=35.69109990914361,
